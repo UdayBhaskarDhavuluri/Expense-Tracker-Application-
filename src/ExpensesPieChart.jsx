@@ -4,7 +4,6 @@ import './ExpenseItemStyles.css'
 import {Chart, ArcElement, Legend, Tooltip, DoughnutController, PieController, CategoryScale, LinearScale, PointElement, LineElement} from 'chart.js'
 Chart.register(ArcElement, Legend, Tooltip, DoughnutController, PieController, CategoryScale, LinearScale, PointElement, LineElement);
 
-
 function ExpensesPieChart({data}) {
     console.log(" props ", data)
   const pieData = {

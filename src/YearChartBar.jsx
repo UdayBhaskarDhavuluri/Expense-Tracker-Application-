@@ -46,5 +46,4 @@ useEffect(() => {
     </div>
   )
 }
-
 export default YearChartBar

@@ -82,7 +82,6 @@ function MonthYearExpense() {
         <button  className = "btnStyles" type="submit">Filter</button>
         
       </form>
-      
       {expenses.map((expense) => (
         <ExpenseItem data = {expense}
           

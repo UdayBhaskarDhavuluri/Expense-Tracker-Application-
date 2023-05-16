@@ -1,7 +1,6 @@
 body{
   height: 100%;
 
-  
 }
 .addExpensecontainer{
   
@@ -44,7 +43,6 @@ input {
   line-height: 30px;
   height:40px;
   width:100%;
-
 }
 label{
   font-size:1.5rem;

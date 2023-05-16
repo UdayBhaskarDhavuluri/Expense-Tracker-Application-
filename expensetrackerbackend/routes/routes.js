@@ -8,30 +8,28 @@ router.post("/addexpense", (request, response) => {
     productprice: request.body.productprice,
     date: request.body.date,
   });
-  expenseTrackerdata.save().then(data => {
-    response.json(data)
-  }).catch(error =>{
-    response.json(error)
-  })
-});
-
-
-
-
-
-
-router.get("/getexpenses", (request, response) => {
-  expenseTrackerTemplate.find()
-    .then(data => {
+  expenseTrackerdata
+    .save()
+    .then((data) => {
       response.json(data);
     })
-    .catch(error => {
+    .catch((error) => {
       response.json(error);
     });
 });
 
+router.get("/getexpenses", (request, response) => {
+  expenseTrackerTemplate
+    .find()
+    .then((data) => {
+      response.json(data);
+    })
+    .catch((error) => {
+      response.json(error);
+    });
+});
 
-router.post('/getFilteredExpenses', async (req, res) => {
+router.post("/getFilteredExpenses", async (req, res) => {
   const { month, year } = req.body;
   const expenses = await expenseTrackerTemplate.find({
     date: { $gte: new Date(year, month - 1), $lt: new Date(year, month) },
@@ -39,7 +37,7 @@ router.post('/getFilteredExpenses', async (req, res) => {
   res.json(expenses);
 });
 
-router.post('/getYearlyExpenses', async (req, res) => {
+router.post("/getYearlyExpenses", async (req, res) => {
   const { year } = req.body;
 
   // Create an aggregation pipeline to group expenses by month and year
@@ -49,12 +47,12 @@ router.post('/getYearlyExpenses', async (req, res) => {
     },
     {
       $group: {
-        _id: { month: { $month: '$date' } },
-        total: { $sum: '$productprice' },
+        _id: { month: { $month: "$date" } },
+        total: { $sum: "$productprice" },
       },
     },
     {
-      $sort: { '_id.month': 1 },
+      $sort: { "_id.month": 1 },
     },
   ];
 
@@ -62,11 +60,9 @@ router.post('/getYearlyExpenses', async (req, res) => {
     const monthlyExpenses = await expenseTrackerTemplate.aggregate(pipeline);
     res.json(monthlyExpenses);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error("Error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-
-
-module.exports = router
+module.exports = router;
